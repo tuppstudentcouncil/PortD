@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TUPP เตรียมตัวดีมีที่เรียน by TUPP Student Council</title>
+  
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span>TUPP เตรียมตัวดีมีที่เรียน 🎓</span>
+      </div>
+      
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">หน้าแรก</a></li>
+        <li><a href="rules.html">ระเบียบการ</a></li>
+        <li><a href="team.html">คณะผู้จัดทำและหน่วยงานสนับสนุน</a></li>
+        <li><a href="https://sites.google.com/tupp.ac.th/tuppsc/home" target="_blank">กลับไปเพจสภานักเรียน</a></li>
+      </ul>
+
+      <div class="hamburger" id="hamburgerBtn">☰</div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <h1>TUPP เตรียมตัวดีมีที่เรียน</h1>
+      <p>เราเป็นสื่อกลาง ที่จะรวบรวมผลงานและแนวทางในการเข้าศึกษาต่อในระดับอุดมศึกษาทุกรอบ TCAS จากรุ่นพี่เตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ เพื่อเป็นแนวทางให้กับน้อง ๆ</p>
+    </div>
+    <div class="hero-overlay"></div>
+  </header>
+
+  <div class="container">
+    
+    <div class="filters-bar">
+      <div class="filter-group">
+        <label>รอบการสมัคร</label>
+        <div class="select-wrapper">
+          <select id="roundFilter">
+            <option value="">ทั้งหมด</option>
+            <option value="Portfolio">Portfolio</option>
+            <option value="Quota">Quota</option>
+            <option value="Admission">Admission</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="filter-group">
+        <label>มหาวิทยาลัย</label>
+        <div class="select-wrapper">
+          <select id="universityFilter">
+            <option value="">ทั้งหมด</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="filter-group">
+        <label>คณะ/สาขา</label>
+        <div class="select-wrapper">
+          <select id="facultyFilter">
+            <option value="">ทั้งหมด</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="resetFilter">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"/></svg>
+        ล้างค่า
+      </button>
+    </div>
+
+    <div class="section-header">
+      <h2>ผลงานล่าสุด</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+    
+    <div id="pageInfo" class="pagination-info"></div>
+
+  </div>
+
+  <footer class="site-footer">
+    <p>© 2024 TUPP Student Council. All Rights Reserved.</p>
+    <p>โรงเรียนเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ</p>
+  </footer>
+
+  <script src="app.js"></script>
+
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      // สลับ class 'active' เพื่อแสดง/ซ่อน เมนู
+      navLinks.classList.toggle('active');
+      
+      // เปลี่ยนไอคอน ถ้าเปิดอยู่ให้เป็น X ถ้าปิดให้เป็น ☰
+      if(navLinks.classList.contains('active')) {
+          hamburger.innerHTML = "✕";
+      } else {
+          hamburger.innerHTML = "☰";
+      }
+    });
+  </script>
+
+</body>
+</html>
