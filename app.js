@@ -2,12 +2,13 @@
    app.js (Unified Version)
    - JSONP แก้ CORS
    - PDF Preview + Thumbnail
-   - Performance Tuned + Pagination
+   - Performance Tuned + Pagination (Large Buttons)
    ============================================================ */
 
 // ================= CONFIG =================
-const API_URL = "https://script.google.com/macros/s/AKfycbyO2H4xvC6NvrS01gdtK4ed1o4CspiYocwQPD0Ndkz3U-BgZLm7doCHn22pMu9v_ky7-A/exec";
-const ITEMS_PER_PAGE = 8;
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbyO2H4xvC6NvrS01gdtK4ed1o4CspiYocwQPD0Ndkz3U-BgZLm7doCHn22pMu9v_ky7-A/exec";
+const ITEMS_PER_PAGE = 9; // ✅ แสดง 9 อันต่อหน้า
 
 // ================= STATE =================
 let allData = [];
@@ -36,7 +37,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 function loadData() {
   return new Promise((resolve, reject) => {
     window.handleApiResponse = function (data) {
-      allData = data.filter(i => i["ชื่อ - นามสกุล"]);
+      allData = data.filter((i) => i["ชื่อ - นามสกุล"]);
       filteredData = [...allData];
 
       document.getElementById("api-script")?.remove();
@@ -68,7 +69,9 @@ function getPdfThumbnail(url) {
 
 function getYoutubeThumbnail(url) {
   const match = url?.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
-  return match ? `https://img.youtube.com/vi/${match[1]}/mqdefault.jpg` : "";
+  return match
+    ? `https://img.youtube.com/vi/${match[1]}/mqdefault.jpg`
+    : "";
 }
 
 // ================= FILTER OPTIONS =================
@@ -76,13 +79,18 @@ function populateFilters() {
   universitySelect.innerHTML = `<option value="">ทุกมหาวิทยาลัย</option>`;
   facultySelect.innerHTML = `<option value="">ทุกคณะ</option>`;
 
-  [...new Set(allData.map(i => i["มหาวิทยาลัยที่ผ่านการคัดเลือก / เข้าศึกษา"]).filter(Boolean))]
+  [...new Set(allData.map((i) => i["มหาวิทยาลัยที่ผ่านการคัดเลือก / เข้าศึกษา"]).filter(Boolean))]
     .sort()
-    .forEach(u => universitySelect.innerHTML += `<option value="${u}">${u}</option>`);
+    .forEach(
+      (u) =>
+        (universitySelect.innerHTML += `<option value="${u}">${u}</option>`)
+    );
 
-  [...new Set(allData.map(i => i["คณะ"]).filter(Boolean))]
+  [...new Set(allData.map((i) => i["คณะ"]).filter(Boolean))]
     .sort()
-    .forEach(f => facultySelect.innerHTML += `<option value="${f}">${f}</option>`);
+    .forEach(
+      (f) => (facultySelect.innerHTML += `<option value="${f}">${f}</option>`)
+    );
 }
 
 // ================= EVENTS =================
@@ -97,10 +105,13 @@ function setupEventListeners() {
 function applyFilters() {
   if (isResetting) return;
 
-  filteredData = allData.filter(i =>
-    (!roundSelect.value || i["เข้าศึกษาในรอบไหน"] === roundSelect.value) &&
-    (!universitySelect.value || i["มหาวิทยาลัยที่ผ่านการคัดเลือก / เข้าศึกษา"] === universitySelect.value) &&
-    (!facultySelect.value || i["คณะ"] === facultySelect.value)
+  filteredData = allData.filter(
+    (i) =>
+      (!roundSelect.value || i["เข้าศึกษาในรอบไหน"] === roundSelect.value) &&
+      (!universitySelect.value ||
+        i["มหาวิทยาลัยที่ผ่านการคัดเลือก / เข้าศึกษา"] ===
+          universitySelect.value) &&
+      (!facultySelect.value || i["คณะ"] === facultySelect.value)
   );
 
   currentPage = 1;
@@ -132,14 +143,16 @@ function render() {
 
   let html = "";
 
-  pageItems.forEach(item => {
+  pageItems.forEach((item) => {
     const realIndex = allData.indexOf(item);
     let cover = "";
 
     if (item["อัปโหลดตัวอย่างพอร์ตโฟลิโอ (PDF)"]) {
       const id = extractFileId(item["อัปโหลดตัวอย่างพอร์ตโฟลิโอ (PDF)"]);
       cover = `
-        <img src="${getPdfThumbnail(item["อัปโหลดตัวอย่างพอร์ตโฟลิโอ (PDF)"])}"
+        <img src="${getPdfThumbnail(
+          item["อัปโหลดตัวอย่างพอร์ตโฟลิโอ (PDF)"]
+        )}"
              class="cover-img"
              loading="lazy"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
@@ -148,7 +161,9 @@ function render() {
                 style="display:none"></iframe>
       `;
     } else if (item["วิดีโอแนะนำรอบ Admission (ถ้ามี)"]) {
-      cover = `<img src="${getYoutubeThumbnail(item["วิดีโอแนะนำรอบ Admission (ถ้ามี)"])}" class="cover-img">`;
+      cover = `<img src="${getYoutubeThumbnail(
+        item["วิดีโอแนะนำรอบ Admission (ถ้ามี)"]
+      )}" class="cover-img">`;
     } else {
       cover = `<div class="placeholder-cover">📄</div>`;
     }
@@ -158,8 +173,12 @@ function render() {
         <div class="card-cover">${cover}</div>
         <div class="card-body">
           <h3>${item["ชื่อ - นามสกุล"]}</h3>
-          <p>${item["คณะ"] || ""} ${item["สาขา"] ? `(${item["สาขา"]})` : ""}</p>
-          <p class="university-tag">🎓 ${item["มหาวิทยาลัยที่ผ่านการคัดเลือก / เข้าศึกษา"]}</p>
+          <p>${item["คณะ"] || ""} ${
+      item["สาขา"] ? `(${item["สาขา"]})` : ""
+    }</p>
+          <p class="university-tag">🎓 ${
+            item["มหาวิทยาลัยที่ผ่านการคัดเลือก / เข้าศึกษา"] || ""
+          }</p>
         </div>
       </div>
     `;
@@ -171,20 +190,41 @@ function render() {
 
 // ================= PAGINATION =================
 function renderPagination(totalPages) {
-  const pagination = document.getElementById("pagination") || createPaginationContainer();
-  let html = `<div style="display:flex;gap:6px;justify-content:center;">`;
+  const pagination =
+    document.getElementById("pagination") || createPaginationContainer();
 
-  html += `<button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? "disabled" : ""}>❮</button>`;
+  let html = `<div class="pagination-wrapper">`;
+
+  html += `
+    <button class="page-btn nav"
+      onclick="changePage(${currentPage - 1})"
+      ${currentPage === 1 ? "disabled" : ""}>
+      ❮
+    </button>
+  `;
 
   for (let i = 1; i <= totalPages; i++) {
     if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 2) {
-      html += `<button onclick="changePage(${i})" ${i === currentPage ? "style='background:#ec4899;color:#fff'" : ""}>${i}</button>`;
+      html += `
+        <button
+          class="page-btn ${i === currentPage ? "active" : ""}"
+          onclick="changePage(${i})">
+          ${i}
+        </button>
+      `;
     } else if (Math.abs(i - currentPage) === 3) {
-      html += `<span>...</span>`;
+      html += `<span class="page-dots">…</span>`;
     }
   }
 
-  html += `<button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? "disabled" : ""}>❯</button>`;
+  html += `
+    <button class="page-btn nav"
+      onclick="changePage(${currentPage + 1})"
+      ${currentPage === totalPages ? "disabled" : ""}>
+      ❯
+    </button>
+  `;
+
   html += `</div>`;
 
   pagination.innerHTML = html;
