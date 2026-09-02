@@ -77,16 +77,35 @@
     </div>
 
     <div class="section-header">
-      <h2>ผลงานล่าสุด</h2>
+      <h2>
+        ผลงานล่าสุด
+        <span id="syncBadge" class="sync-badge" style="display:none;">
+          <span class="sync-dot" id="syncDot"></span>
+          <span id="syncText">ข้อมูลล่าสุด</span>
+        </span>
+      </h2>
       <div class="divider"></div>
     </div>
 
-    <div class="grid" id="grid"></div>
+    <div class="grid" id="grid">
+      <!-- Skeleton Cards จะถูกเรนเดอร์ทันทีขณะกำลังโหลด -->
+    </div>
     
     <div id="pageInfo" class="pagination-info"></div>
 
   </div>
   
+  <!-- Loading Modal Overlay -->
+  <div id="loadingModal" class="loading-overlay">
+    <div class="loading-card">
+      <div class="loading-spinner-ring"></div>
+      <h3>กำลังโหลดข้อมูล...</h3>
+      <p id="loadingStatusText">กำลังดึงข้อมูลแฟ้มสะสมผลงานล่าสุด กรุณารอสักครู่</p>
+      <div class="loading-progress-bar">
+        <div class="loading-progress-fill"></div>
+      </div>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <p>© 2026 TUPP Student Council. All Rights Reserved.</p>
