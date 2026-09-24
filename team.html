@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>คณะผู้จัดทำ - TUPP Student Council</title>
+  <link rel="icon" type="image/svg+xml" href="logotuppportfolio.svg" />
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
@@ -48,7 +50,12 @@
 
   <nav class="navbar">
     <div class="nav-container">
-      <div class="logo"><span>TUPP เตรียมตัวดีมีที่เรียน 🎓</span></div>
+      <div class="logo">
+        <a href="index.html">
+          <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="nav-logo" />
+          <span>TUPP เตรียมตัวดีมีที่เรียน 🎓</span>
+        </a>
+      </div>
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html">หน้าแรก</a></li>
         <li><a href="rules.html">ระเบียบการ</a></li>
@@ -59,15 +66,36 @@
     </div>
   </nav>
 
+  <header class="hero page-hero">
+    <div class="hero-inner">
+      <div class="hero-corner-logo">
+        <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="hero-logo-img" />
+      </div>
+      <div class="hero-content">
+        <h1>คณะผู้จัดทำและหน่วยงานสนับสนุน</h1>
+        <p>โครงการเตรียมตัวดีมีที่เรียน พี่โชว์พอร์ต • TUPP Student Council</p>
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+  </header>
+
   <main class="page-container">
-    <h1 class="page-title">คณะผู้จัดทำและหน่วยงานสนับสนุน</h1>
+    <div class="project-intro-block">
+      <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="project-intro-logo">
+      <h2 style="font-size: 1.4rem; color: var(--secondary); margin-bottom: 6px;">โครงการเตรียมตัวดีมีที่เรียน (TUPP Portfolio)</h2>
+      <p style="color: var(--text-light); max-width: 600px; margin: 0 auto; font-size: 0.95rem;">
+        <div>เราเป็นสื่อกลางรวบรวมแฟ้มสะสมผลงาน และแนวทางศึกษาต่อระดับอุดมศึกษา</div>
+        <div>จากรุ่นพี่โรงเรียนเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ</div>
+      </p>
+    </div>
 
     <div class="content-block">
       <h2>ทีมผู้พัฒนาเว็บไซต์</h2>
       <div class="team-grid">
         
         <div class="team-card">
-          <img src="S__8151044.jpg" alt="รูปคนที่ 1" class="team-profile-img">
+          <img src="S__8151044.jpg" alt="รูปนายร่มธรรม แท่นแก้ว" class="team-profile-img" loading="lazy" decoding="async" width="120" height="120">
+          
           <div class="team-name">นายร่มธรรม แท่นแก้ว</div>
           <div class="team-position">ประธานนักเรียน ประจำปีการศึกษา 2567</div> 
           <div class="team-position">รองประธานชมรมศิษย์เก่า ฝ่ายสื่อสารองค์กร</div> 
@@ -75,12 +103,12 @@
         </div>
 
         <div class="team-card">
-          <img src="เจต.png" alt="นายเจตต์นิภัทธ์ เบ็ญจมิตรกุล" class="team-profile-img">
+          <img src="เจต.png" alt="นายเจตต์นิภัทธ์ เบ็ญจมิตรกุล" class="team-profile-img" loading="lazy" decoding="async" width="120" height="120">
           
           <div class="team-name">นายเจตต์นิภัทธ์ เบ็ญจมิตรกุล</div>
           <div class="team-position">หัวหน้าฝ่ายพัฒนาสารสนเทศ ประจำปีการศึกษา 2568</div>
-         <div class="team-position">ผู้ร่วมก่อตั้งชมรม STEM CLUB พื้นที่ของคนมีของ</div> 
-          <div class="team-role">โครงการห้องเรียนพิเศษวิทยาศาสตร์ วิจัย และเทคโนโลยี</div>
+          <div class="team-position">ผู้ร่วมก่อตั้งชมรม STEM CLUB พื้นที่ของคนมีของ</div>
+          <div class="team-role">นักเรียนในโครงการห้องเรียนพิเศษวิทยาศาสตร์ วิจัยฯ</div>
         </div>
 
       </div>
@@ -91,7 +119,7 @@
       <p>ผู้ริเริ่มโครงการและรวบรวมข้อมูลประสานงานกับนักเรียนรุ่นพี่</p>
       <div class="team-grid">
  <div class="team-card">
-  <img src="สภา.jpg" alt="โลโก้สภานักเรียน" class="team-profile-img">
+  <img src="สภา.jpg" alt="โลโก้สภานักเรียน" class="team-profile-img" loading="lazy" decoding="async" width="120" height="120">
 
   <div class="team-name">คณะกรรมการสภานักเรียน</div>
   <div class="team-role">ผู้ประสานงานหลัก</div>
@@ -105,7 +133,7 @@
       <p>ขอขอบคุณการสนับสนุนจากชมรมศิษย์เก่าเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ</p>
       <div class="team-grid">
   <div class="team-card">
-  <img src="ศิษย์เก่า.jpg" alt="โลโก้ชมรมศิษย์เก่า TUPP" class="team-profile-img">
+  <img src="ศิษย์เก่า.jpg" alt="โลโก้ชมรมศิษย์เก่า TUPP" class="team-profile-img" loading="lazy" decoding="async" width="120" height="120">
 
   <div class="team-name">ชมรมศิษย์เก่า</div>
   <div class="team-role">ผู้สนับสนุนโครงการ</div>
@@ -122,6 +150,12 @@
       </ul>
     </div>
   </main>
+
+  <footer class="site-footer">
+    <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="footer-logo" />
+    <p>© 2026 TUPP Student Council. All Rights Reserved.</p>
+    <p>คณะกรรมการสภานักเรียน โรงเรียนเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ</p>
+  </footer>
 
   <script>
     const hamburger = document.getElementById('hamburgerBtn');
