@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>คณะผู้จัดทำ - TUPP Student Council</title>
+  <link rel="icon" type="image/svg+xml" href="logotuppportfolio.svg" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+      /* Style สำหรับรูปโปรไฟล์ */
+      .team-profile-img {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 4px solid white;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          margin-bottom: 15px;
+          background-color: #f1f5f9;
+      }
+      
+      .team-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 30px 20px; /* เพิ่มพื้นที่นิดหน่อย */
+      }
+
+      /* ✨ เพิ่ม Style สำหรับตำแหน่ง (เช่น ประธานนักเรียน) */
+      .team-position {
+          color: var(--primary); /* สีชมพูตามธีม */
+          font-weight: 600;
+          font-size: 0.95rem;
+          margin-bottom: 4px;
+      }
+
+      /* ปรับหน้าที่ (Web Dev) ให้ตัวเล็กลงหน่อยเพื่อไม่แย่งซีน */
+      .team-role {
+          font-size: 0.85rem;
+          color: #94a3b8; /* สีเทาจางๆ */
+          font-weight: 400;
+      }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="nav-logo" />
+          <span>TUPP เตรียมตัวดีมีที่เรียน 🎓</span>
+        </a>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="rules.html">ระเบียบการ</a></li>
+        <li><a href="team.html" class="active">คณะผู้จัดทำและหน่วยงานสนับสนุน</a></li>
+        <li><a href="https://sites.google.com/tupp.ac.th/tuppsc/home" target="_blank">กลับไปเพจสภานักเรียน</a></li>
+      </ul>
+      <div class="hamburger" id="hamburgerBtn">☰</div>
+    </div>
+  </nav>
+
+  <header class="hero page-hero">
+    <div class="hero-inner">
+      <div class="hero-corner-logo">
+        <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="hero-logo-img" />
+      </div>
+      <div class="hero-content">
+        <h1>คณะผู้จัดทำและหน่วยงานสนับสนุน</h1>
+        <p>โครงการเตรียมตัวดีมีที่เรียน พี่โชว์พอร์ต • TUPP Student Council</p>
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+  </header>
+
+  <main class="page-container">
+    <div class="project-intro-block">
+      <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="project-intro-logo">
+      <h2 style="font-size: 1.4rem; color: var(--secondary); margin-bottom: 6px;">โครงการเตรียมตัวดีมีที่เรียน (TUPP Portfolio)</h2>
+      <p style="color: var(--text-light); max-width: 600px; margin: 0 auto; font-size: 0.95rem;">
+        สื่อกลางรวบรวมแฟ้มสะสมผลงานและแนวทางศึกษาต่อระดับอุดมศึกษา จากรุ่นพี่เตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h2>ทีมผู้พัฒนาเว็บไซต์</h2>
+      <div class="team-grid">
+        
+        <div class="team-card">
+          <img src="S__8151044.jpg" alt="รูปนายร่มธรรม แท่นแก้ว" class="team-profile-img" loading="lazy" decoding="async" width="120" height="120">
+          
+          <div class="team-name">นายร่มธรรม แท่นแก้ว</div>
+          <div class="team-position">ประธานนักเรียน ประจำปีการศึกษา 2567</div> 
+          <div class="team-position">รองประธานชมรมศิษย์เก่า ฝ่ายสื่อสารองค์กร</div> 
+          <div class="team-role">ผู้จัดทำ</div>
+        </div>
+
+        <div class="team-card">
+          <img src="เจต.png" alt="นายเจตต์นิภัทธ์ เบ็ญจมิตรกุล" class="team-profile-img" loading="lazy" decoding="async" width="120" height="120">
+          
+          <div class="team-name">นายเจตต์นิภัทธ์ เบ็ญจมิตรกุล</div>
+          <div class="team-position">หัวหน้าฝ่ายพัฒนาสารสนเทศ ประจำปีการศึกษา 2568</div>
+          <div class="team-role">ผู้จัดทำ</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h2>คณะกรรมการสภาสภานักเรียน (TUPP Student Council)</h2>
+      <p>ผู้ริเริ่มโครงการและรวบรวมข้อมูลประสานงานกับนักเรียนรุ่นพี่</p>
+      <div class="team-grid">
+ <div class="team-card">
+  <img src="สภา.jpg" alt="โลโก้สภานักเรียน" class="team-profile-img" loading="lazy" decoding="async" width="120" height="120">
+
+  <div class="team-name">คณะกรรมการสภานักเรียน</div>
+  <div class="team-role">ผู้ประสานงานหลัก</div>
+</div>
+
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h2>ชมรมศิษย์เก่า (TUPP ALUMNI)</h2>
+      <p>ขอขอบคุณการสนับสนุนจากชมรมศิษย์เก่าเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ</p>
+      <div class="team-grid">
+  <div class="team-card">
+  <img src="ศิษย์เก่า.jpg" alt="โลโก้ชมรมศิษย์เก่า TUPP" class="team-profile-img" loading="lazy" decoding="async" width="120" height="120">
+
+  <div class="team-name">ชมรมศิษย์เก่า</div>
+  <div class="team-role">ผู้สนับสนุนโครงการ</div>
+  </div>
+
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h2>ขอขอบคุณ 🙏</h2>
+      <ul>
+        <li>งานแนะแนว โรงเรียนเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ</li>
+        <li>รุ่นพี่ TUPP ทุกท่านที่ร่วมแบ่งปันผลงาน</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="footer-logo" />
+    <p>© 2026 TUPP Student Council. All Rights Reserved.</p>
+    <p>คณะกรรมการสภานักเรียน โรงเรียนเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ</p>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      hamburger.innerHTML = navLinks.classList.contains('active') ? "✕" : "☰";
+    });
+  </script>
+</body>
+</html>

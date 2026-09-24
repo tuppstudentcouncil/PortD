@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TUPP เตรียมตัวดีมีที่เรียน by TUPP Student Council</title>
+  
+  <link rel="icon" type="image/svg+xml" href="logotuppportfolio.svg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="nav-logo" />
+          <span>TUPP เตรียมตัวดีมีที่เรียน 🎓</span>
+        </a>
+      </div>
+      
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">หน้าแรก</a></li>
+        <li><a href="rules.html">ระเบียบการ</a></li>
+        <li><a href="team.html">คณะผู้จัดทำและหน่วยงานสนับสนุน</a></li>
+        <li><a href="https://sites.google.com/tupp.ac.th/tuppsc/home" target="_blank">กลับไปเพจสภานักเรียน</a></li>
+      </ul>
+
+      <div class="hamburger" id="hamburgerBtn">☰</div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner-marquee">
+      <div class="hero-corner-logo">
+        <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="hero-logo-img" />
+      </div>
+
+      <!-- Marquee แสดงความยินดีรุ่นพี่ -->
+      <div class="marquee-wrapper" id="marqueeWrapper" title="ชี้เมาส์เพื่อหยุดดู หรือคลิกเพื่อดูภาพขยาย">
+        <div class="marquee-track" id="marqueeTrack">
+          <!-- รูปภาพตัววิ่งจากโฟลเดอร์แสดงความยินดีรุ่นพี่ -->
+        </div>
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+  </header>
+
+  <div class="container">
+    
+    <div class="filters-bar">
+      <div class="filter-group">
+        <label>รอบการสมัคร</label>
+        <div class="select-wrapper">
+          <select id="roundFilter">
+            <option value="">ทั้งหมด</option>
+            <option value="Portfolio">Portfolio</option>
+            <option value="Quota">Quota</option>
+            <option value="Admission">Admission</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="filter-group">
+        <label>มหาวิทยาลัย</label>
+        <div class="select-wrapper">
+          <select id="universityFilter">
+            <option value="">ทั้งหมด</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="filter-group">
+        <label>คณะ/สาขา</label>
+        <div class="select-wrapper">
+          <select id="facultyFilter">
+            <option value="">ทั้งหมด</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="resetFilter">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"/></svg>
+        ล้างค่า
+      </button>
+    </div>
+
+    <div class="section-header">
+      <h2>
+        ผลงานล่าสุด
+        <span id="syncBadge" class="sync-badge" style="display:none;">
+          <span class="sync-dot" id="syncDot"></span>
+          <span id="syncText">ข้อมูลล่าสุด</span>
+        </span>
+      </h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="grid" id="grid">
+      <!-- Skeleton Cards จะถูกเรนเดอร์ทันทีขณะกำลังโหลด -->
+    </div>
+    
+    <div id="pageInfo" class="pagination-info"></div>
+
+  </div>
+  
+  <!-- Loading Modal Overlay -->
+  <div id="loadingModal" class="loading-overlay">
+    <div class="loading-card">
+      <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" style="height: 55px; width: auto; object-fit: contain; margin-bottom: 15px; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.08));">
+      <div class="loading-spinner-ring"></div>
+      <h3>กำลังโหลดข้อมูล...</h3>
+      <div class="loading-progress-bar">
+        <div class="loading-progress-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="footer-logo" />
+    <p>© 2026 TUPP Student Council. All Rights Reserved.</p>
+    <p>คณะกรรมการสภานักเรียน โรงเรียนเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ</p>
+  </footer>
+
+  <script src="app.js"></script>
+
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      // สลับ class 'active' เพื่อแสดง/ซ่อน เมนู
+      navLinks.classList.toggle('active');
+      
+      // เปลี่ยนไอคอน ถ้าเปิดอยู่ให้เป็น X ถ้าปิดให้เป็น ☰
+      if(navLinks.classList.contains('active')) {
+          hamburger.innerHTML = "✕";
+      } else {
+          hamburger.innerHTML = "☰";
+      }
+    });
+  </script>
+
+  <!-- Modal ขยายรูปภาพแสดงความยินดี แบบหน้าต่างคอมพิวเตอร์ -->
+  <div id="imageLightboxModal" class="image-lightbox-modal" onclick="closeImageLightbox()">
+    <div class="os-window" onclick="event.stopPropagation()">
+      <div class="os-window-header">
+        <div class="os-window-dots">
+          <span class="os-dot dot-red" onclick="closeImageLightbox()" title="ปิดหน้าต่าง"></span>
+          <span class="os-dot dot-yellow" onclick="closeImageLightbox()" title="ย่อหน้าต่าง"></span>
+          <span class="os-dot dot-green" title="ขยาย"></span>
+        </div>
+        <div class="os-window-title">🎉 แสดงความยินดีรุ่นพี่ • TUPP Portfolio</div>
+        <button class="os-window-close-btn" onclick="closeImageLightbox()" title="ปิดหน้าต่าง">✕</button>
+      </div>
+      <div class="os-window-content">
+        <img id="lightboxImg" src="" alt="ภาพแสดงความยินดี">
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

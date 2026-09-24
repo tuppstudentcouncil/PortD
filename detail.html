@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Viewer - TUPP</title>
+  
+  <link rel="icon" type="image/svg+xml" href="logotuppportfolio.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --text-main: #1e293b;
+      --text-sub: #64748b;
+      --bg-sidebar: #ffffff;
+      --bg-viewer: #f8fafc;
+      --border: #e2e8f0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Prompt', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      color: var(--text-main);
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 380px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      z-index: 10;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.03);
+    }
+
+    .sidebar-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-sub);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .back-btn:hover { color: var(--primary); transform: translateX(-3px); }
+
+    /* Scrollable Info Area */
+    .info-scroll {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+    }
+    .info-scroll::-webkit-scrollbar { width: 6px; }
+    .info-scroll::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
+
+    .badge-round {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #e0e7ff;
+      color: var(--primary);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .student-name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
+
+    /* Meta Group (ข้อมูลย่อย) */
+    .meta-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-left: 12px;
+    }
+    .meta-group.highlight {
+      background: #f8fafc;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .label {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+    }
+    
+    .value {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      line-height: 1.6;
+      white-space: pre-line; /* เว้นบรรทัดตามจริง */
+    }
+
+    .contact-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9rem;
+    }
+    .contact-item i { color: var(--text-sub); width: 16px; }
+
+    .uni-text { color: var(--primary); font-weight: 600; font-size: 1.1rem; }
+
+    /* Controls */
+    .controls {
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      background: white;
+      display: flex;
+      gap: 12px;
+    }
+
+    .ctrl-btn {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Prompt', sans-serif;
+      font-weight: 600;
+      color: var(--text-main);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .ctrl-btn:hover:not(:disabled) {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+    }
+    .ctrl-btn:disabled { opacity: 0.5; cursor: not-allowed; background: #f1f5f9; }
+
+    /* ===== VIEWER ===== */
+    .viewer-area {
+      flex-grow: 1;
+      background-color: #333; /* Dark background for focus */
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      z-index: 2;
+      background: white;
+    }
+
+    /* Loading Container */
+    .loader-container {
+      position: absolute;
+      text-align: center;
+      color: white;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .loader-spinner {
+      width: 52px;
+      height: 52px;
+      border: 5px solid rgba(255, 255, 255, 0.2);
+      border-bottom-color: var(--primary);
+      border-right-color: #f472b6;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 0.9s linear infinite;
+    }
+
+    .loader-text {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #f8fafc;
+      letter-spacing: 0.3px;
+    }
+
+    .loader-sub {
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    /* Empty State */
+    .empty-state {
+      position: absolute;
+      text-align: center;
+      color: white;
+      z-index: 1;
+    }
+    .empty-state i { font-size: 3rem; margin-bottom: 10px; opacity: 0.5; }
+    .empty-state p { opacity: 0.8; }
+
+    @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      body { flex-direction: column; height: auto; min-height: 100dvh; overflow-y: auto; }
+      .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+      .viewer-area { min-height: 500px; height: 75dvh; }
+      .info-scroll { max-height: 380px; }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="sidebar-header" style="display: flex; align-items: center; justify-content: space-between;">
+      <a href="index.html" class="back-btn" onclick="handleGoBack(event)">
+        <i class="fas fa-arrow-left"></i> กลับหน้าหลัก
+      </a>
+      <a href="index.html" title="หน้าแรก" onclick="handleGoBack(event)">
+        <img src="logotuppportfolio.svg" alt="TUPP Portfolio" style="height: 32px; width: auto; object-fit: contain;">
+      </a>
+    </div>
+
+    <div class="info-scroll" id="infoArea">
+      </div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="prevBtn" onclick="changePerson(-1)">
+        <i class="fas fa-chevron-left"></i> ก่อนหน้า
+      </button>
+      <button class="ctrl-btn" id="nextBtn" onclick="changePerson(1)">
+        ถัดไป <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </aside>
+
+  <main class="viewer-area">
+    <div class="loader-container" id="loader">
+      <span class="loader-spinner"></span>
+      <p class="loader-text">กำลังโหลดเอกสารแฟ้มสะสมผลงาน...</p>
+      <small class="loader-sub">กรุณารอสักครู่</small>
+    </div>
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <i class="fas fa-file-excel"></i>
+      <p>ไม่มีไฟล์แนบในรายการนี้</p>
+    </div>
+    <iframe id="contentFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </main>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbyO2H4xvC6NvrS01gdtK4ed1o4CspiYocwQPD0Ndkz3U-BgZLm7doCHn22pMu9v_ky7-A/exec";
+    let allData = JSON.parse(localStorage.getItem("portfolio_list") || localStorage.getItem("tupp_portfolio_cache_data") || "[]");
+    let currentIndex = parseInt(localStorage.getItem("portfolio_index") || "0");
+    const frame = document.getElementById("contentFrame");
+    const loader = document.getElementById("loader");
+    const emptyState = document.getElementById("emptyState");
+
+    // ตรวจสอบข้อมูลเริ่มต้น
+    initDetail();
+
+    async function initDetail() {
+      if (allData && allData.length > 0) {
+        renderDetail();
+        return;
+      }
+
+      // ลองโหลดจาก data.json
+      try {
+        const res = await fetch("data.json");
+        if (res.ok) {
+          const json = await res.json();
+          allData = (json || []).filter(i => i && i["ชื่อ - นามสกุล"]);
+          if (allData.length > 0) {
+            localStorage.setItem("tupp_portfolio_cache_data", JSON.stringify(allData));
+            localStorage.setItem("portfolio_list", JSON.stringify(allData));
+            renderDetail();
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn("Local fetch failed, trying live API fallback");
+      }
+
+      loadDataFallback();
+    }
+
+    // ฟังค์ชั่น Keyboard
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "ArrowLeft") changePerson(-1);
+      if (e.key === "ArrowRight") changePerson(1);
+    });
+
+    // ซ่อน Loader เมื่อ iframe โหลดเสร็จ
+    frame.onload = function() {
+      if(frame.src && frame.src !== "about:blank") {
+        loader.style.display = "none";
+      }
+    };
+
+    function handleGoBack(e) {
+      sessionStorage.setItem("is_returning_from_detail", "true");
+      if (window.history.length > 1) {
+        e.preventDefault();
+        window.history.back();
+      }
+    }
+
+    function loadDataFallback() {
+      loader.style.display = "flex";
+      const script = document.createElement("script");
+      script.src = `${API_URL}?callback=handleApiResponse`;
+      window.handleApiResponse = function(data) {
+        allData = (data || []).filter(i => i && i["ชื่อ - นามสกุล"]);
+        localStorage.setItem("tupp_portfolio_cache_data", JSON.stringify(allData));
+        localStorage.setItem("portfolio_list", JSON.stringify(allData));
+        renderDetail();
+      };
+      script.onerror = function() {
+        window.location.href = "index.html";
+      };
+      document.body.appendChild(script);
+    }
+
+    function extractFileId(url) {
+      if (!url) return null;
+      if (url.includes("open?id=")) return url.split("open?id=")[1].split("&")[0];
+      if (url.includes("/file/d/")) return url.split("/file/d/")[1].split("/")[0].split("?")[0];
+      if (url.includes("id=")) return url.split("id=")[1].split("&")[0];
+      return null;
+    }
+
+    function renderDetail() {
+      const item = allData[currentIndex];
+      if (!item) {
+        window.location.href = "index.html";
+        return;
+      }
+
+      // Reset Viewer UI
+      loader.style.display = "flex";
+      emptyState.style.display = "none";
+      frame.style.opacity = "0"; // ซ่อนไปก่อนค่อยโชว์ตอนโหลดเสร็จ
+
+      const round = item["เข้าศึกษาในรอบไหน"] || "-";
+
+      // --- 1. ส่วนหัว + ข้อมูลส่วนตัว ---
+      let html = `
+        <span class="badge-round"><i class="fas fa-tag"></i> ${round}</span>
+        <h1 class="student-name">${item["ชื่อ - นามสกุล"] || "ไม่ระบุชื่อ"}</h1>
+        
+        <div class="meta-group highlight">
+          <div class="label"><i class="fas fa-university"></i> มหาวิทยาลัย</div>
+          <div class="value uni-text">${item["มหาวิทยาลัยที่ผ่านการคัดเลือก / เข้าศึกษา"] || "-"}</div>
+        </div>
+
+        <div class="meta-group">
+          <div class="label"><i class="fas fa-graduation-cap"></i> คณะ / สาขา</div>
+          <div class="value">${item["คณะ"] || "-"} <br> ${item["สาขา"] || ""}</div>
+        </div>
+
+        <div class="meta-group">
+           <div class="label"><i class="fas fa-user-graduate"></i> ข้อมูลผู้เรียน</div>
+           <div class="value">รุ่น ${item["รุ่น"] || "-"} <br> ${item["สายการเรียน"] || "-"}</div>
+        </div>
+
+        <div class="meta-group">
+           <div class="label"><i class="fas fa-address-book"></i> ช่องทางติดต่อ</div>
+           <div class="contact-list">
+             ${item["Gmail"] ? `<div class="contact-item"><i class="far fa-envelope"></i> ${item["Gmail"]}</div>` : ""}
+             ${item["ช่องทางติดต่อเพิ่มเติม (ไม่บังคับ)"] ? `<div class="contact-item"><i class="fas fa-bullhorn"></i> ${item["ช่องทางติดต่อเพิ่มเติม (ไม่บังคับ)"]}</div>` : ""}
+             ${(!item["Gmail"] && !item["ช่องทางติดต่อเพิ่มเติม (ไม่บังคับ)"]) ? "<div class='value'>-</div>" : ""}
+           </div>
+        </div>
+
+        <hr style="margin: 20px 0; border:0; border-top:1px dashed #e2e8f0;">
+      `;
+
+      // --- Logic แยกตามรอบ ---
+      const pdfLink = item["อัปโหลดตัวอย่างพอร์ตโฟลิโอ (PDF)"];
+      const videoLink = item["วิดีโอแนะนำพอร์ต (ถ้ามี)"] || item["วิดีโอแนะนำ (ถ้ามี)"] || item["วิดีโอแนะนำรอบ Admission (ถ้ามี)"];
+
+      if (round === "Portfolio") {
+         html += createField("comment-dots", "คำแนะนำ/ข้อคิด", item["คำแนะนำ ข้อคิด หรือคำคมจากการทำพอร์ต หรือที่ต้องการบอกน้อง ๆ"]);
+         html += createField("list-check", "แนวทางการทำพอร์ต", item["แนวทางหรือขั้นตอนการทำพอร์ตของคุณ"]);
+         setupViewer(pdfLink, videoLink, "pdf");
+
+      } else if (round === "Quota" || round.includes("โควตา")) {
+         html += createField("ticket-alt", "ประเภทโควตา", item["ใช้โควตาประเภทใด"]);
+         html += createField("lightbulb", "คำแนะนำการยื่น", item["คำแนะนำสำหรับการยื่นรอบ Quota"]);
+         html += createField("briefcase", "สิ่งที่ควรมี", item["สิ่งที่ควรมีสำหรับรอบ Quota"]);
+         html += createField("book-open", "การเตรียมตัว", item["การเตรียมตัวสำหรับรอบ Quota"]);
+         setupViewer(pdfLink, videoLink, pdfLink ? "pdf" : "video");
+
+      } else if (round === "Admission") {
+         html += createField("comments", "คำแนะนำสอบ", item["คำแนะนำสำหรับการสอบ Admission"]);
+         html += createField("clipboard-check", "สิ่งที่ควรมี", item["สิ่งที่ควรมีสำหรับรอบ Admission"]);
+         html += createField("book-reader", "การเตรียมตัว", item["การเตรียมตัวสอบ Admission"]);
+         setupViewer(pdfLink, videoLink, pdfLink ? "pdf" : "video");
+      }
+
+      document.getElementById("infoArea").innerHTML = html;
+      updateButtons();
+    }
+
+    // Helper สร้าง HTML แต่ละช่อง
+    function createField(icon, label, text) {
+      if (!text || text === "-" || text.trim() === "") return "";
+      return `
+        <div class="meta-group">
+          <div class="label"><i class="fas fa-${icon}"></i> ${label}</div>
+          <div class="value">${text}</div>
+        </div>
+      `;
+    }
+
+    function changePerson(direction) {
+      const newIndex = currentIndex + direction;
+      if (newIndex >= 0 && newIndex < allData.length) {
+        currentIndex = newIndex;
+        localStorage.setItem("portfolio_index", currentIndex);
+        renderDetail();
+      }
+    }
+
+    function updateButtons() {
+      document.getElementById('prevBtn').disabled = (currentIndex === 0);
+      document.getElementById('nextBtn').disabled = (currentIndex === allData.length - 1);
+    }
+
+    // จัดการ Viewer (Link Converter)
+    function setupViewer(pdfLink, videoLink, priority) {
+        let url = "";
+        let videoUrl = "";
+        let pdfUrl = "";
+
+        // แปลง Link Youtube
+        if (videoLink) {
+            const match = videoLink.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
+            if (match) videoUrl = `https://www.youtube.com/embed/${match[1]}?autoplay=1`;
+        }
+        // แปลง Link Drive
+        if (pdfLink) {
+            const id = extractFileId(pdfLink);
+            if (id) pdfUrl = `https://drive.google.com/file/d/${id}/preview`;
+        }
+
+        // เลือกแสดงผล
+        if (priority === "pdf" && pdfUrl) url = pdfUrl;
+        else if (videoUrl) url = videoUrl;
+        else if (pdfUrl) url = pdfUrl; // fallback
+
+        // แสดงผล
+        if (url) {
+            frame.src = url;
+            frame.style.opacity = "1";
+        } else {
+            // ไม่มีไฟล์ -> โชว์ Empty State
+            loader.style.display = "none";
+            emptyState.style.display = "block";
+            frame.src = "about:blank";
+            frame.style.opacity = "0";
+        }
+    }
+  </script>
+</body>
+</html>

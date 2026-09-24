@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ระเบียบการ - TUPP Student Council</title>
+  <link rel="icon" type="image/svg+xml" href="logotuppportfolio.svg" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+      /* CSS สำหรับปุ่มส่งผลงาน */
+      .btn-submit {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          background-color: var(--primary);
+          color: white;
+          padding: 12px 24px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: 600;
+          margin-top: 15px;
+          transition: all 0.2s;
+          box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
+          border: 1px solid transparent;
+      }
+      
+      .btn-submit:hover {
+          background-color: white;
+          color: var(--primary);
+          border-color: var(--primary);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 15px rgba(236, 72, 153, 0.4);
+      }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="nav-logo" />
+          <span>TUPP เตรียมตัวดีมีที่เรียน 🎓</span>
+        </a>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="rules.html" class="active">ระเบียบการ</a></li>
+        <li><a href="team.html">คณะผู้จัดทำและหน่วยงานสนับสนุน</a></li>
+        <li><a href="https://sites.google.com/tupp.ac.th/tuppsc/home" target="_blank">กลับไปเพจสภานักเรียน</a></li>
+      </ul>
+      <div class="hamburger" id="hamburgerBtn">☰</div>
+    </div>
+  </nav>
+
+  <header class="hero page-hero">
+    <div class="hero-inner">
+      <div class="hero-corner-logo">
+        <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="hero-logo-img" />
+      </div>
+      <div class="hero-content">
+        <h1>ระเบียบการใช้งาน</h1>
+        <p>ข้อตกลงและแนวทางการใช้งานระบบแฟ้มสะสมผลงาน TUPP Portfolio</p>
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+  </header>
+
+  <main class="page-container">
+    <div class="project-intro-block">
+      <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="project-intro-logo">
+      <h2 style="font-size: 1.4rem; color: var(--secondary); margin-bottom: 6px;">โครงการเตรียมตัวดีมีที่เรียน (TUPP Portfolio)</h2>
+      <p style="color: var(--text-light); max-width: 600px; margin: 0 auto; font-size: 0.95rem;">
+        ข้อกำหนดและเงื่อนไขการเผยแพร่และใช้งานแฟ้มสะสมผลงาน
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h2>1. วัตถุประสงค์</h2>
+      <p>เว็บไซต์นี้จัดทำขึ้นเพื่อรวบรวมและเผยแพร่ผลงานแฟ้มสะสมผลงาน (Portfolio) ของนักเรียนรุ่นพี่ เพื่อเป็นแนวทางและแรงบันดาลใจให้กับรุ่นน้องในการศึกษาต่อในระดับอุดมศึกษา</p>
+    </div>
+
+    <div class="content-block">
+      <h2>2. ข้อตกลงการใช้งาน</h2>
+      <ul>
+        <li>ข้อมูลและไฟล์ทั้งหมดในเว็บไซต์นี้ ได้รับความยินยอมจากเจ้าของผลงานแล้ว</li>
+        <li>ไม่อนุญาตให้นำไฟล์ผลงานไปดัดแปลง คัดลอก หรือแอบอ้างว่าเป็นผลงานของตนเอง</li>
+        <li>ข้อมูลส่วนบุคคล (เช่น เบอร์โทร, ที่อยู่) บางส่วนจะถูกปกปิดเพื่อความเป็นส่วนตัว โดยผู้ส่งผลงานสามารถปิดด้วยตนเองได้</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h2>3. การส่งผลงานเข้าระบบ</h2>
+      <p>หากนักเรียนระดับชั้น ม.6 ต้องการส่งผลงานเพื่อเผยแพร่ สามารถคลิกที่ปุ่มด้านล่างเพื่อกรอกข้อมูลผ่าน Google Forms</p>
+      
+      <a href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdMWxaQMaOOvwDjVxNQqIsyx6Uw1sazYWMfdT5b2VZweTTRPQ/formResponse" target="_blank" class="btn-submit">
+        📝 ส่งผลงานคลิกที่นี่
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <img src="logotuppportfolio.svg" alt="โลโก้ TUPP Portfolio" class="footer-logo" />
+    <p>© 2026 TUPP Student Council. All Rights Reserved.</p>
+    <p>คณะกรรมการสภานักเรียน โรงเรียนเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ</p>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      hamburger.innerHTML = navLinks.classList.contains('active') ? "✕" : "☰";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ประกาศแจ้งย้ายเว็บไซต์ | TUPP เตรียมตัวดีมีที่เรียน</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="logotuppportfolio.svg">
+
+  <!-- Redirect อัตโนมัติภายใน 15 วินาที -->
+  <meta http-equiv="refresh" content="15;url=https://tuppstudentcouncil.github.io/PortD/">
+
+  <style>
+    body {
+      font-family: 'Prompt', 'Sarabun', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #f8fafc;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.08);
+      padding: 40px 35px;
+      border-radius: 18px;
+      max-width: 600px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+    }
+
+    /* โลโก้ */
+    .logos {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 25px;
+    }
+    .logos img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 50%;
+      background: #ffffff;
+      padding: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    }
+
+    h1 {
+      margin-bottom: 18px;
+      font-size: 2rem;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      margin-bottom: 22px;
+    }
+
+    .countdown {
+      font-size: 0.95rem;
+      margin-bottom: 22px;
+      opacity: 0.95;
+    }
+
+    a.button {
+      display: inline-block;
+      background: #e5e7eb;
+      color: #0f172a;
+      padding: 12px 30px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    a.button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    }
+
+    .url {
+      margin-top: 18px;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      word-break: break-all;
+    }
+  </style>
+
+  <script>
+    let seconds = 15;
+    setInterval(() => {
+      seconds--;
+      if (seconds >= 0) {
+        document.getElementById("sec").textContent = seconds;
+      }
+    }, 1000);
+  </script>
+</head>
+
+<body>
+  <div class="card">
+
+    <!-- โลโก้ -->
+    <div class="logos">
+      <img src="สภา.jpg" alt="สภานักเรียน">
+      <img src="ศิษย์เก่า.jpg" alt="ศิษย์เก่า">
+    </div>
+
+    <h1>ประกาศแจ้งย้ายเว็บไซต์</h1>
+
+    <p>
+      เว็บไซต์ <strong>TUPP เตรียมตัวดีมีที่เรียน</strong><br>
+      ได้ดำเนินการย้ายไปยังโดเมนใหม่อย่างเป็นทางการแล้ว<br>
+      เพื่อความถูกต้อง ความปลอดภัย และความต่อเนื่องในการเข้าใช้งาน
+    </p>
+
+    <div class="countdown">
+      ระบบจะนำท่านไปยังเว็บไซต์ใหม่ภายใน <strong><span id="sec">15</span></strong> วินาที
+    </div>
+
+    <a class="button" href="https://tuppstudentcouncil.github.io/PortD/">
+      เข้าสู่เว็บไซต์ใหม่
+    </a>
+
+    <div class="url">
+      https://tuppstudentcouncil.github.io/PortD/
+    </div>
+
+  </div>
+</body>
+</html>
